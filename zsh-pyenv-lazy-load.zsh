@@ -1,4 +1,6 @@
-if type pyenv &> /dev/null; then
+# find out if pyenv is the file
+# or already a function
+if ! test -f $(whence pyenv); then
   return
 fi
 
@@ -6,9 +8,6 @@ _init_pyenv() {
   unset -f pyenv _pyenv_chpwd_hook _init_pyenv
   chpwd_functions[$chpwd_functions[(i)_pyenv_chpwd_hook]]=()
 
-  if [[ ! "$PATH" == */.pyenv/bin* ]]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-  fi
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 }
