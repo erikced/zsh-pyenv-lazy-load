@@ -1,4 +1,4 @@
-if type pyenv &> /dev/null; then
+if ! type pyenv &> /dev/null; then
   return
 fi
 
@@ -9,8 +9,8 @@ _init_pyenv() {
   if [[ ! "$PATH" == */.pyenv/bin* ]]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
   fi
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  eval "$(pyenv init - 2>/dev/null)"
+  eval "$(pyenv virtualenv-init - 2>/dev/null)"
 }
 
 pyenv() {
@@ -29,4 +29,6 @@ _pyenv_chpwd_hook() {
   done
 }
 
-export chpwd_functions=($chpwd_functions _pyenv_chpwd_hook)
+export chpwd_functions=(${chpwd_functions[@]} _pyenv_chpwd_hook)
+
+true
