@@ -9,7 +9,7 @@ _init_pyenv() {
   if [[ ! "$PATH" == */.pyenv/bin* ]]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
   fi
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
   eval "$(pyenv virtualenv-init -)"
 }
 
