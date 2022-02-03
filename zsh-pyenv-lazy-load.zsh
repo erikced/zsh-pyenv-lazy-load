@@ -10,6 +10,7 @@ _init_pyenv() {
     export PATH="$HOME/.pyenv/bin:$PATH"
   fi
   eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 }
 
